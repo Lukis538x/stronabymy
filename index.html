@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lukis538x_ | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #0a0a0f;
+            --primary-black: #121218;
+            --secondary-black: #1a1a24;
+            --accent-purple: #7b3fe4;
+            --accent-lavender: #9d6ff3;
+            --light-purple: #b89cf5;
+            --text-white: #f0e6ff;
+            --text-gray: #c2b5d6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(123, 63, 228, 0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 70%, rgba(157, 111, 243, 0.1) 0%, transparent 40%),
+                var(--primary-dark);
+            z-index: -2;
+        }
+
+        /* HEADER */
+        header {
+            background-color: rgba(10, 10, 15, 0.95);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 2px solid var(--accent-purple);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo span {
+            color: var(--light-purple);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            transition: width 0.4s;
+        }
+
+        nav a:hover {
+            color: var(--accent-lavender);
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        .nav-active {
+            color: var(--accent-lavender);
+        }
+
+        .nav-active::before {
+            width: 100%;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 10rem 5% 6rem;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--accent-lavender), var(--light-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--accent-lavender);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        /* SOCIAL LINKS */
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            color: var(--text-white);
+            background: var(--secondary-black);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: 2px solid transparent;
+        }
+
+        .social-link:hover {
+            background: var(--accent-purple);
+            transform: translateY(-5px);
+            border-color: var(--accent-lavender);
+            box-shadow: 0 10px 20px rgba(123, 63, 228, 0.3);
+        }
+
+        /* ADMIN BUTTON */
+        .admin-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(123, 63, 228, 0.4);
+        }
+
+        .admin-btn.logged-in {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+        }
+
+        .admin-btn.logged-in:hover {
+            box-shadow: 0 8px 20px rgba(123, 63, 228, 0.4);
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 5rem 5%;
+            background-color: var(--primary-black);
+            border-top: 1px solid rgba(123, 63, 228, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            color: var(--accent-lavender);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            border-radius: 2px;
+        }
+
+        /* SKILLS SECTION */
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--secondary-black);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(123, 63, 228, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(123, 63, 228, 0.2);
+            border-color: rgba(123, 63, 228, 0.4);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+        }
+
+        .skill-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 1rem;
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            color: var(--accent-lavender);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .skill-level {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .level-text {
+            color: var(--text-gray);
+            font-weight: 500;
+        }
+
+        .level-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .level-basic {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+            border: 1px solid #3498db;
+        }
+
+        .level-intermediate {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            border: 1px solid #2ecc71;
+        }
+
+        .level-advanced {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+
+        /* TIMELINE SECTION */
+        .timeline-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-purple), var(--accent-lavender));
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-lavender);
+            border-radius: 50%;
+            border: 4px solid var(--primary-black);
+            z-index: 2;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background-color: var(--secondary-black);
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+            border: 1px solid rgba(123, 63, 228, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 50%;
+            padding-left: 4rem;
+            text-align: left;
+            border-left: 4px solid var(--accent-purple);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: 50%;
+            padding-right: 4rem;
+            text-align: right;
+            border-right: 4px solid var(--accent-purple);
+        }
+
+        .timeline-date {
+            color: var(--accent-lavender);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-date {
+            justify-content: flex-end;
+        }
+
+        .timeline-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+            font-weight: 600;
+        }
+
+        .timeline-desc {
+            color: var(--text-gray);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* ADMIN PANEL */
+        .admin-panel {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--primary-black);
+            border: 2px solid var(--accent-purple);
+            border-radius: 15px;
+            padding: 1.5rem;
+            width: 300px;
+            z-index: 1002;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .admin-panel h3 {
+            color: var(--accent-lavender);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .admin-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .admin-option {
+            background: var(--secondary-black);
+            border: 1px solid rgba(123, 63, 228, 0.3);
+            border-radius: 8px;
+            padding: 0.8rem;
+            color: var(--text-white);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .admin-option:hover {
+            background: rgba(123, 63, 228, 0.2);
+            transform: translateX(5px);
+            border-color: var(--accent-lavender);
+        }
+
+        /* ADMIN CONTROLS ON TIMELINE */
+        .admin-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            justify-content: flex-end;
+        }
+
+        .edit-btn, .delete-btn, .add-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .edit-btn {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            color: white;
+        }
+
+        .edit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(123, 63, 228, 0.4);
+        }
+
+        .delete-btn {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .add-btn {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            color: white;
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        /* MODALS */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--primary-black);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            border: 2px solid var(--accent-purple);
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-white);
+            font-weight: 500;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--secondary-black);
+            border: 1px solid rgba(123, 63, 228, 0.3);
+            border-radius: 8px;
+            color: var(--text-white);
+            font-size: 1rem;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-lavender);
+            box-shadow: 0 0 0 3px rgba(123, 63, 228, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--secondary-black);
+            color: var(--text-white);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-success {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .btn-small {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        /* ERROR MESSAGE */
+        .error-message {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* PROJECTS LINK SECTION */
+        .projects-link-section {
+            padding: 5rem 5%;
+            background-color: var(--secondary-black);
+            text-align: center;
+        }
+
+        .projects-link-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(26, 26, 36, 0.8);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(123, 63, 228, 0.3);
+        }
+
+        .projects-icon {
+            font-size: 3rem;
+            color: var(--accent-lavender);
+            margin-bottom: 1.5rem;
+        }
+
+        .projects-link-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .projects-link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(123, 63, 228, 0.4);
+        }
+
+        /* CONTACT SECTION */
+        .contact-section {
+            padding: 5rem 5%;
+            background-color: var(--primary-black);
+            text-align: center;
+        }
+
+        .contact-simple {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(26, 26, 36, 0.8);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(123, 63, 228, 0.3);
+        }
+
+        .contact-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .contact-list li {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .contact-list i {
+            color: var(--accent-lavender);
+            font-size: 1.5rem;
+            width: 30px;
+        }
+
+        .contact-email {
+            color: var(--text-gray);
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background-color: rgba(123, 63, 228, 0.1);
+            font-size: 1.1rem;
+        }
+
+        .contact-email:hover {
+            color: var(--accent-lavender);
+            background-color: rgba(123, 63, 228, 0.2);
+        }
+
+        .contact-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-lavender);
+            background-color: rgba(123, 63, 228, 0.1);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--primary-black);
+            padding: 3rem 5% 1.5rem;
+            border-top: 2px solid var(--accent-purple);
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-lavender);
+        }
+
+        .footer-bottom {
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-line {
+                left: 30px;
+            }
+            
+            .timeline-dot {
+                left: 30px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+                margin-right: 0;
+                padding-left: 2rem;
+                padding-right: 1rem;
+                text-align: left;
+                border-left: 4px solid var(--accent-purple);
+                border-right: none;
+            }
+            
+            .admin-panel {
+                width: 90%;
+                right: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Lukis<span>538x_</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">O mnie</a></li>
+                <li><a href="#skills">Umiejętności</a></li>
+                <li><a href="#timeline">Historia</a></li>
+                <li><a href="#projects-link">Projekty</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <h1>Lukis538x_</h1>
+        <h2>Developer & Minecraft Enthusiast</h2>
+        <p class="hero-subtitle">
+            Pasjonat programowania z wieloletnim doświadczeniem w tworzeniu rozwiązań dla społeczności Minecraft. 
+            Członek zespołu OgSiec.eu od początku jego istnienia.
+        </p>
+        
+        <div class="social-links">
+            <a href="https://guns.lol/lukis538x_" class="social-link" target="_blank">
+                <i class="fas fa-gun"></i>
+            </a>
+            <a href="https://discord.com/users/915950188307284010" class="social-link" target="_blank">
+                <i class="fab fa-discord"></i>
+            </a>
+            <a href="mailto:wspolpraca.lukis538x@gmail.com" class="social-link">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="section" id="skills">
+        <h2 class="section-title">Umiejętności</h2>
+        
+        <div class="skills-container">
+            <div class="skills-grid" id="skillsGrid">
+                <!-- Umiejętności z obrazka 1 -->
+                <div class="skill-card">
+                    <i class="fab fa-react skill-icon"></i>
+                    <h3 class="skill-name">React</h3>
+                    <div class="skill-level">
+                        <span class="level-text">Poziom:</span>
+                        <span class="level-badge level-advanced">Zaawansowany</span>
+                    </div>
+                    <p style="color: var(--text-gray);">Tworzenie interfejsów użytkownika, komponenty funkcyjne, hooks</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fab fa-js-square skill-icon"></i>
+                    <h3 class="skill-name">JavaScript</h3>
+                    <div class="skill-level">
+                        <span class="level-text">Poziom:</span>
+                        <span class="level-badge level-advanced">Zaawansowany</span>
+                    </div>
+                    <p style="color: var(--text-gray);">ES6+, asynchroniczność, praca z API, manipulacja DOM</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fab fa-node-js skill-icon"></i>
+                    <h3 class="skill-name">Node.js</h3>
+                    <div class="skill-level">
+                        <span class="level-text">Poziom:</span>
+                        <span class="level-badge level-advanced">Zaawansowany</span>
+                    </div>
+                    <p style="color: var(--text-gray);">Tworzenie serwerów backendowych, REST API, Express.js</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fab fa-python skill-icon"></i>
+                    <h3 class="skill-name">Python</h3>
+                    <div class="skill-level">
+                        <span class="level-text">Poziom:</span>
+                        <span class="level-badge level-advanced">Zaawansowany</span>
+                    </div>
+                    <p style="color: var(--text-gray);">Skrypty automatyzacyjne, web scraping, data processing</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-palette skill-icon"></i>
+                    <h3 class="skill-name">Tailwind CSS</h3>
+                    <div class="skill-level">
+                        <span class="level-text">Poziom:</span>
+                        <span class="level-badge level-advanced">Zaawansowany</span>
+                    </div>
+                    <p style="color: var(--text-gray);">Responsywne layouty, utility-first CSS, konfiguracja</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fas fa-database skill-icon"></i>
+                    <h3 class="skill-name">PostgreSQL</h3>
+                    <div class="skill-level">
+                        <span class="level-text">Poziom:</span>
+                        <span class="level-badge level-advanced">Zaawansowany</span>
+                    </div>
+                    <p style="color: var(--text-gray);">Projektowanie baz danych, zapytania SQL, optymalizacja</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fab fa-docker skill-icon"></i>
+                    <h3 class="skill-name">Docker</h3>
+                    <div class="skill-level">
+                        <span class="level-text">Poziom:</span>
+                        <span class="level-badge level-basic">Podstawowy</span>
+                    </div>
+                    <p style="color: var(--text-gray);">Konteneryzacja aplikacji, Docker Compose, podstawy orchestration</p>
+                </div>
+                
+                <div class="skill-card">
+                    <i class="fab fa-aws skill-icon"></i>
+                    <h3 class="skill-name">AWS</h3>
+                    <div class="skill-level">
+                        <span class="level-text">Poziom:</span>
+                        <span class="level-badge level-basic">Podstawowy</span>
+                    </div>
+                    <p style="color: var(--text-gray);">EC2, S3, CloudFront, podstawy infrastruktury chmurowej</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE SECTION -->
+    <section class="section" id="timeline">
+        <h2 class="section-title">Moja historia</h2>
+        
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            
+            <!-- Historia z obrazka 2 -->
+            <div class="timeline-item">
+                <div class="timeline-dot" style="top: 0%;"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">
+                        <i class="far fa-calendar-alt"></i> 2026 - Obecnie
+                    </div>
+                    <h3 class="timeline-title">Ciągły rozwój i ekspansja</h3>
+                    <div class="timeline-desc">
+                        <p>Kontynuujemy rozwój naszej sieci serwerów.</p>
+                        <p>Implementujemy nowe funkcje, rozszerzamy społeczność i tworzymy jeszcze lepsze doświadczenie dla wszystkich członków OgSiec.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" style="top: 50%;"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date" style="justify-content: flex-end;">
+                        <i class="far fa-calendar-alt"></i> Sierpień 2023
+                    </div>
+                    <h3 class="timeline-title">Założenie pierwszego serwera OgWar.pl</h3>
+                    <div class="timeline-desc">
+                        <p>Rozpoczęcie pierwszego serwera pod marką Og.</p>
+                        <p>Stworzenie fundamentów pod przyszłą sieć serwerów i budowa pierwszych społeczności graczy.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot" style="top: 100%;"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">
+                        <i class="far fa-calendar-alt"></i> Marzec 2022
+                    </div>
+                    <h3 class="timeline-title">Założenie OgSiec</h3>
+                    <div class="timeline-desc">
+                        <p>Powstanie pomysłu i fundamentów pod sieć serwerów OgSiec.</p>
+                        <p>Początek planowania, organizacji i tworzenia wizji zjednoczonej społeczności graczy Minecraft.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS LINK SECTION -->
+    <section class="projects-link-section" id="projects-link">
+        <h2 class="section-title">Moje Projekty</h2>
+        
+        <div class="projects-link-card">
+            <i class="fas fa-code projects-icon"></i>
+            <h3 style="color: var(--accent-lavender); margin-bottom: 1rem; font-size: 2rem;">Zobacz moje portfolio projektów</h3>
+            <p style="color: var(--text-gray); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                Sprawdź moje najnowsze projekty, w tym serwery Minecraft, autorskie pluginy, aplikacje webowe i wiele innych. 
+                Każdy projekt to unikalne rozwiązanie stworzone z pasją i dbałością o szczegóły.
+            </p>
+            <a href="projekty.html" class="projects-link-btn">
+                <i class="fas fa-external-link-alt"></i> Przejdź do projektów
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">POROZMAWIAJMY</h2>
+        
+        <div class="contact-simple">
+            <ul class="contact-list">
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong><br>
+                        <span class="contact-email">wspolpraca.lukis538x@gmail.com</span>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-gun"></i>
+                    <div>
+                        <strong>Portfolio</strong><br>
+                        <a href="https://guns.lol/lukis538x_" class="contact-link" target="_blank">guns.lol/lukis538x_</a>
+                    </div>
+                </li>
+                <li>
+                    <i class="fab fa-discord"></i>
+                    <div>
+                        <strong>Discord</strong><br>
+                        <a href="https://discord.com/users/915950188307284010" class="contact-link" target="_blank">@lukis538x_</a>
+                    </div>
+                </li>
+            </ul>
+            
+            <p style="margin-top: 2rem; color: var(--text-gray); font-size: 1.1rem; line-height: 1.6;">
+                Masz projekt? Chętnie porozmawiam o współpracy. Skontaktuj się ze mną przez email lub Discord!
+            </p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">OgSiec.eu</div>
+            <ul class="footer-links">
+                <li><a href="#home">O mnie</a></li>
+                <li><a href="#skills">Umiejętności</a></li>
+                <li><a href="#timeline">Historia</a></li>
+                <li><a href="#projects-link">Projekty</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+            <div class="social-links" style="justify-content: center;">
+                <a href="https://guns.lol/lukis538x_" class="social-link" target="_blank">
+                    <i class="fas fa-gun"></i>
+                </a>
+                <a href="https://discord.com/users/915950188307284010" class="social-link" target="_blank">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="mailto:wspolpraca.lukis538x@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 OgSiec.eu | Wszystkie prawa zastrzeżone
+        </div>
+    </footer>
+
+    <!-- ADMIN BUTTON -->
+    <button class="admin-btn" id="adminBtn">
+        <i class="fas fa-user-lock"></i> Logowanie ownera
+    </button>
+
+    <!-- ADMIN PANEL -->
+    <div class="admin-panel" id="adminPanel">
+        <h3>Panel Administracyjny</h3>
+        <div class="admin-options">
+            <div class="admin-option" id="addTimelineOption">
+                <i class="fas fa-plus-circle"></i> Dodaj wpis do historii
+            </div>
+            <div class="admin-option" id="editSkillsOption">
+                <i class="fas fa-edit"></i> Edytuj umiejętności
+            </div>
+            <div class="admin-option" id="editContactOption">
+                <i class="fas fa-address-book"></i> Edytuj kontakt
+            </div>
+            <div class="admin-option" id="logoutOption">
+                <i class="fas fa-sign-out-alt"></i> Wyloguj się
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">Logowanie ownera</div>
+            <div class="modal-body">
+                <div class="error-message" id="loginError"></div>
+                <div class="form-group">
+                    <label for="username">Login</label>
+                    <input type="text" id="username" class="form-input" placeholder="Wprowadź login">
+                </div>
+                <div class="form-group">
+                    <label for="password">Hasło</label>
+                    <input type="password" id="password" class="form-input" placeholder="Wprowadź hasło">
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" id="cancelLogin">Anuluj</button>
+                    <button class="btn btn-primary" id="submitLogin">Zaloguj się</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD/EDIT TIMELINE MODAL -->
+    <div class="modal" id="timelineModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="timelineModalTitle">Dodaj nowy wpis do historii</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="timelineYear">Rok/Data:</label>
+                    <input type="text" id="timelineYear" class="form-input" placeholder="np. 2026 - Obecnie, Styczeń 2024">
+                </div>
+                <div class="form-group">
+                    <label for="timelineTitle">Tytuł:</label>
+                    <input type="text" id="timelineTitle" class="form-input" placeholder="np. Ciągły rozwój i ekspansja">
+                </div>
+                <div class="form-group">
+                    <label for="timelineDescription">Opis:</label>
+                    <textarea id="timelineDescription" class="form-input form-textarea" placeholder="Opisz wydarzenie..."></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" id="cancelTimeline">Anuluj</button>
+                    <button class="btn btn-primary" id="submitTimeline">Zapisz wpis</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT CONTACT MODAL -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                Edytuj dane kontaktowe
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="contactEmail">Email:</label>
+                    <input type="email" id="contactEmail" class="form-input" placeholder="twój@email.pl">
+                </div>
+                <div class="form-group">
+                    <label for="contactPortfolio">Portfolio:</label>
+                    <input type="text" id="contactPortfolio" class="form-input" placeholder="guns.lol/twojprofil">
+                </div>
+                <div class="form-group">
+                    <label for="contactDiscord">Discord:</label>
+                    <input type="text" id="contactDiscord" class="form-input" placeholder="twojanazwa">
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" id="cancelContact">Anuluj</button>
+                    <button class="btn btn-primary" id="saveContact">Zapisz zmiany</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE CONFIRM MODAL -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                Potwierdzenie usunięcia
+            </div>
+            <div class="modal-body">
+                <p style="color: var(--text-white); margin-bottom: 1.5rem; text-align: center;">
+                    Czy na pewno chcesz usunąć ten wpis?
+                </p>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" id="cancelDelete">Anuluj</button>
+                    <button class="btn btn-danger" id="confirmDelete">Usuń</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // KONFIGURACJA LOGOWANIA
+        const LOGIN_CONFIG = {
+            username: 'Lukis538x_',
+            password: '12345'
+        };
+
+        // Data management
+        let timelineData = [];
+        let contactData = {};
+        let isLoggedIn = false;
+        let itemToDelete = null;
+        let editingTimelineIndex = null;
+
+        // Default timeline data
+        const defaultTimelineData = [
+            {
+                year: "2026 - Obecnie",
+                title: "Ciągły rozwój i ekspansja",
+                description: "Kontynuujemy rozwój naszej sieci serwerów.<br>Implementujemy nowe funkcje, rozszerzamy społeczność i tworzymy jeszcze lepsze doświadczenie dla wszystkich członków OgSiec."
+            },
+            {
+                year: "Sierpień 2023",
+                title: "Założenie pierwszego serwera OgWar.pl",
+                description: "Rozpoczęcie pierwszego serwera pod marką Og.<br>Stworzenie fundamentów pod przyszłą sieć serwerów i budowa pierwszych społeczności graczy."
+            },
+            {
+                year: "Marzec 2022",
+                title: "Założenie OgSiec",
+                description: "Powstanie pomysłu i fundamentów pod sieć serwerów OgSiec.<br>Początek planowania, organizacji i tworzenia wizji zjednoczonej społeczności graczy Minecraft."
+            }
+        ];
+
+        // Default contact data
+        const defaultContactData = {
+            email: "wspolpraca.lukis538x@gmail.com",
+            portfolio: "guns.lol/lukis538x_",
+            discord: "lukis538x_"
+        };
+
+        // Load data from localStorage
+        function loadData() {
+            try {
+                const savedTimeline = localStorage.getItem('lukis_timeline');
+                const savedContact = localStorage.getItem('lukis_contact');
+                
+                timelineData = savedTimeline ? JSON.parse(savedTimeline) : [...defaultTimelineData];
+                contactData = savedContact ? JSON.parse(savedContact) : {...defaultContactData};
+                
+                const savedLogin = localStorage.getItem('lukis_logged_in');
+                if (savedLogin === 'true') {
+                    isLoggedIn = true;
+                    updateAdminUI();
+                }
+                
+                renderTimeline();
+                updateContactDisplay();
+            } catch (e) {
+                console.error('Error loading data:', e);
+                timelineData = [...defaultTimelineData];
+                contactData = {...defaultContactData};
+                saveData();
+                renderTimeline();
+                updateContactDisplay();
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('lukis_timeline', JSON.stringify(timelineData));
+            localStorage.setItem('lukis_contact', JSON.stringify(contactData));
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const container = document.querySelector('.timeline-container');
+            const timelineLine = container.querySelector('.timeline-line');
+            
+            const items = container.querySelectorAll('.timeline-item');
+            items.forEach(item => item.remove());
+            
+            const itemCount = timelineData.length;
+            const positions = [];
+            
+            for (let i = 0; i < itemCount; i++) {
+                positions.push((i / (itemCount - 1)) * 100);
+            }
+            
+            timelineData.forEach((item, index) => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+                
+                const position = positions[index];
+                
+                timelineItem.innerHTML = `
+                    <div class="timeline-dot" style="top: ${position}%;"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">
+                            <i class="far fa-calendar-alt"></i> ${item.year}
+                            ${isLoggedIn ? `
+                                <div style="margin-left: auto; display: flex; gap: 5px;">
+                                    <button class="btn btn-success btn-small edit-timeline-btn" data-index="${index}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-small delete-timeline-btn" data-index="${index}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            ` : ''}
+                        </div>
+                        <h3 class="timeline-title">${item.title}</h3>
+                        <div class="timeline-desc">${item.description}</div>
+                    </div>
+                `;
+                
+                container.appendChild(timelineItem);
+            });
+            
+            if (isLoggedIn) {
+                document.querySelectorAll('.edit-timeline-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const index = parseInt(btn.getAttribute('data-index'));
+                        editTimelineItem(index);
+                    });
+                });
+                
+                document.querySelectorAll('.delete-timeline-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const index = parseInt(btn.getAttribute('data-index'));
+                        itemToDelete = index;
+                        document.getElementById('deleteModal').classList.add('active');
+                    });
+                });
+            }
+        }
+
+        // Update contact display
+        function updateContactDisplay() {
+            const emailElement = document.querySelector('.contact-email');
+            const portfolioElement = document.querySelector('.contact-link[href*="guns.lol"]');
+            const discordElement = document.querySelector('.contact-link:last-child');
+            
+            if (emailElement) {
+                emailElement.textContent = contactData.email;
+            }
+            
+            if (portfolioElement) {
+                portfolioElement.textContent = contactData.portfolio;
+                portfolioElement.href = `https://${contactData.portfolio}`;
+            }
+            
+            if (discordElement) {
+                discordElement.textContent = `@${contactData.discord}`;
+            }
+        }
+
+        // Add new timeline item
+        function addTimelineItem(year, title, description) {
+            timelineData.unshift({
+                year,
+                title,
+                description: description.replace(/\n/g, '<br>')
+            });
+            saveData();
+            renderTimeline();
+            alert('Wpis został dodany pomyślnie!');
+        }
+
+        // Edit timeline item
+        function editTimelineItem(index) {
+            const item = timelineData[index];
+            editingTimelineIndex = index;
+            
+            document.getElementById('timelineYear').value = item.year;
+            document.getElementById('timelineTitle').value = item.title;
+            document.getElementById('timelineDescription').value = item.description.replace(/<br>/g, '\n');
+            
+            document.getElementById('timelineModalTitle').textContent = 'Edytuj wpis historii';
+            document.getElementById('submitTimeline').textContent = 'Zaktualizuj wpis';
+            
+            document.getElementById('timelineModal').classList.add('active');
+        }
+
+        // Update timeline item
+        function updateTimelineItem(index, year, title, description) {
+            timelineData[index] = {
+                year,
+                title,
+                description: description.replace(/\n/g, '<br>')
+            };
+            saveData();
+            renderTimeline();
+            alert('Wpis został zaktualizowany pomyślnie!');
+        }
+
+        // Delete timeline item
+        function deleteTimelineItem(index) {
+            timelineData.splice(index, 1);
+            saveData();
+            renderTimeline();
+        }
+
+        // Login function
+        function login(username, password) {
+            if (username === LOGIN_CONFIG.username && password === LOGIN_CONFIG.password) {
+                isLoggedIn = true;
+                localStorage.setItem('lukis_logged_in', 'true');
+                updateAdminUI();
+                document.getElementById('loginModal').classList.remove('active');
+                document.getElementById('loginError').classList.remove('show');
+                return true;
+            } else {
+                showLoginError('Nieprawidłowa nazwa użytkownika lub hasło!');
+                return false;
+            }
+        }
+
+        function showLoginError(message) {
+            const errorMsg = document.getElementById('loginError');
+            errorMsg.textContent = message;
+            errorMsg.classList.add('show');
+        }
+
+        // Logout function
+        function logout() {
+            isLoggedIn = false;
+            localStorage.removeItem('lukis_logged_in');
+            updateAdminUI();
+            hideAdminPanel();
+        }
+
+        // Update admin UI based on login state
+        function updateAdminUI() {
+            const adminBtn = document.getElementById('adminBtn');
+            
+            if (isLoggedIn) {
+                adminBtn.innerHTML = '<i class="fas fa-user-cog"></i> Panel admina';
+                adminBtn.classList.add('logged-in');
+                renderTimeline();
+            } else {
+                adminBtn.innerHTML = '<i class="fas fa-user-lock"></i> Logowanie ownera';
+                adminBtn.classList.remove('logged-in');
+                renderTimeline();
+            }
+        }
+
+        // Show/hide admin panel
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('active');
+        }
+
+        function hideAdminPanel() {
+            document.getElementById('adminPanel').classList.remove('active');
+        }
+
+        // Initialize on DOM load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load all data
+            loadData();
+            
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId.startsWith('#')) {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            e.preventDefault();
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Kopiowanie maila
+            document.querySelector('.contact-email').addEventListener('click', function() {
+                const email = contactData.email;
+                navigator.clipboard.writeText(email).then(() => {
+                    const originalText = this.textContent;
+                    this.textContent = 'Skopiowano!';
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                    }, 2000);
+                });
+            });
+            
+            // Admin button click
+            document.getElementById('adminBtn').addEventListener('click', () => {
+                if (isLoggedIn) {
+                    toggleAdminPanel();
+                } else {
+                    document.getElementById('loginModal').classList.add('active');
+                    document.getElementById('username').focus();
+                }
+            });
+            
+            // Admin panel options
+            document.getElementById('addTimelineOption').addEventListener('click', () => {
+                hideAdminPanel();
+                openAddTimelineModal();
+            });
+            
+            document.getElementById('editSkillsOption').addEventListener('click', () => {
+                hideAdminPanel();
+                alert('Edytowanie umiejętności - funkcja w budowie');
+            });
+            
+            document.getElementById('editContactOption').addEventListener('click', () => {
+                hideAdminPanel();
+                openContactEditor();
+            });
+            
+            document.getElementById('logoutOption').addEventListener('click', logout);
+            
+            function openAddTimelineModal() {
+                editingTimelineIndex = null;
+                document.getElementById('timelineYear').value = '';
+                document.getElementById('timelineTitle').value = '';
+                document.getElementById('timelineDescription').value = '';
+                
+                document.getElementById('timelineModalTitle').textContent = 'Dodaj nowy wpis do historii';
+                document.getElementById('submitTimeline').textContent = 'Dodaj wpis';
+                
+                document.getElementById('timelineModal').classList.add('active');
+            }
+            
+            function openContactEditor() {
+                document.getElementById('contactEmail').value = contactData.email;
+                document.getElementById('contactPortfolio').value = contactData.portfolio;
+                document.getElementById('contactDiscord').value = contactData.discord;
+                
+                document.getElementById('contactModal').classList.add('active');
+            }
+            
+            // Login modal handlers
+            document.getElementById('cancelLogin').addEventListener('click', () => {
+                document.getElementById('loginModal').classList.remove('active');
+                document.getElementById('loginError').classList.remove('show');
+            });
+            
+            document.getElementById('submitLogin').addEventListener('click', () => {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (!username || !password) {
+                    showLoginError('Wprowadź nazwę użytkownika i hasło!');
+                    return;
+                }
+                
+                login(username, password);
+            });
+            
+            // Login on Enter key
+            document.getElementById('password').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    document.getElementById('submitLogin').click();
+                }
+            });
+            
+            // Timeline modal handlers
+            document.getElementById('cancelTimeline').addEventListener('click', () => {
+                document.getElementById('timelineModal').classList.remove('active');
+                editingTimelineIndex = null;
+            });
+            
+            document.getElementById('submitTimeline').addEventListener('click', () => {
+                const year = document.getElementById('timelineYear').value.trim();
+                const title = document.getElementById('timelineTitle').value.trim();
+                const description = document.getElementById('timelineDescription').value.trim();
+                
+                if (!year || !title || !description) {
+                    alert('Wszystkie pola są wymagane!');
+                    return;
+                }
+                
+                if (editingTimelineIndex !== null) {
+                    updateTimelineItem(editingTimelineIndex, year, title, description);
+                } else {
+                    addTimelineItem(year, title, description);
+                }
+                
+                document.getElementById('timelineModal').classList.remove('active');
+                editingTimelineIndex = null;
+            });
+            
+            // Contact modal handlers
+            document.getElementById('cancelContact').addEventListener('click', () => {
+                document.getElementById('contactModal').classList.remove('active');
+            });
+            
+            document.getElementById('saveContact').addEventListener('click', () => {
+                contactData.email = document.getElementById('contactEmail').value;
+                contactData.portfolio = document.getElementById('contactPortfolio').value;
+                contactData.discord = document.getElementById('contactDiscord').value;
+                
+                saveData();
+                updateContactDisplay();
+                alert('Dane kontaktowe zostały zaktualizowane!');
+                document.getElementById('contactModal').classList.remove('active');
+            });
+            
+            // Delete modal handlers
+            document.getElementById('cancelDelete').addEventListener('click', () => {
+                document.getElementById('deleteModal').classList.remove('active');
+                itemToDelete = null;
+            });
+            
+            document.getElementById('confirmDelete').addEventListener('click', () => {
+                if (itemToDelete !== null) {
+                    deleteTimelineItem(itemToDelete);
+                    document.getElementById('deleteModal').classList.remove('active');
+                    itemToDelete = null;
+                }
+            });
+            
+            // Close modals on outside click
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                        if (modal.id === 'loginModal') {
+                            document.getElementById('loginError').classList.remove('show');
+                        }
+                        if (modal.id === 'timelineModal') {
+                            editingTimelineIndex = null;
+                        }
+                        if (modal.id === 'deleteModal') {
+                            itemToDelete = null;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
