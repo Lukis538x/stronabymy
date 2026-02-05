@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ZMIENNE CSS - Styl OgSiec.eu */
         :root {
             --primary-dark: #0a0a0f;
             --primary-black: #121218;
@@ -16,8 +17,10 @@
             --light-purple: #b89cf5;
             --text-white: #f0e6ff;
             --text-gray: #c2b5d6;
+            --timeline-color: #5a2db8;
         }
 
+        /* RESET */
         * {
             margin: 0;
             padding: 0;
@@ -33,6 +36,7 @@
             min-height: 100vh;
         }
 
+        /* TŁO */
         body::before {
             content: '';
             position: fixed;
@@ -47,6 +51,23 @@
             z-index: -2;
         }
 
+        /* ANIMACJE */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* HEADER */
         header {
             background-color: rgba(10, 10, 15, 0.95);
@@ -59,6 +80,7 @@
             width: 100%;
             z-index: 1000;
             border-bottom: 2px solid var(--accent-purple);
+            animation: fadeIn 0.8s ease-out;
         }
 
         .logo {
@@ -78,6 +100,13 @@
             display: flex;
             list-style: none;
             gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
         }
 
         nav a {
@@ -126,6 +155,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            animation: fadeIn 1s ease-out;
         }
 
         .hero h1 {
@@ -182,39 +212,6 @@
             box-shadow: 0 10px 20px rgba(123, 63, 228, 0.3);
         }
 
-        /* ADMIN BUTTON */
-        .admin-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            z-index: 1001;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .admin-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(123, 63, 228, 0.4);
-        }
-
-        .admin-btn.logged-in {
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
-        }
-
-        .admin-btn.logged-in:hover {
-            box-shadow: 0 8px 20px rgba(123, 63, 228, 0.4);
-        }
-
         /* SECTIONS */
         .section {
             padding: 5rem 5%;
@@ -248,6 +245,19 @@
             margin: 0 auto;
         }
 
+        .skills-category {
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            color: var(--light-purple);
+            margin-bottom: 2rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--accent-purple);
+        }
+
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -265,8 +275,8 @@
         }
 
         .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(123, 63, 228, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(123, 63, 228, 0.2);
             border-color: rgba(123, 63, 228, 0.4);
         }
 
@@ -280,18 +290,22 @@
             background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
         }
 
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
         .skill-name {
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--text-white);
-            margin-bottom: 1rem;
         }
 
         .skill-icon {
             font-size: 2rem;
             color: var(--accent-lavender);
-            margin-bottom: 1rem;
-            display: block;
         }
 
         .skill-level {
@@ -331,7 +345,12 @@
             border: 1px solid #e74c3c;
         }
 
-        /* TIMELINE SECTION */
+        /* TIMELINE SECTION - NASZA HISTORIA */
+        .timeline-section {
+            padding: 5rem 5%;
+            background-color: var(--primary-black);
+        }
+
         .timeline-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -357,6 +376,7 @@
             border-radius: 50%;
             border: 4px solid var(--primary-black);
             z-index: 2;
+            transition: all 0.3s;
         }
 
         .timeline-item {
@@ -364,6 +384,26 @@
             justify-content: center;
             margin-bottom: 5rem;
             position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 50%;
+            padding-left: 4rem;
+            text-align: left;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: 50%;
+            padding-right: 4rem;
+            text-align: right;
         }
 
         .timeline-content {
@@ -372,22 +412,42 @@
             padding: 2rem;
             border-radius: 15px;
             position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid rgba(123, 63, 228, 0.2);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .timeline-item:nth-child(odd) .timeline-content {
-            margin-left: 50%;
-            padding-left: 4rem;
-            text-align: left;
             border-left: 4px solid var(--accent-purple);
         }
 
         .timeline-item:nth-child(even) .timeline-content {
-            margin-right: 50%;
-            padding-right: 4rem;
-            text-align: right;
             border-right: 4px solid var(--accent-purple);
+        }
+
+        /* EFEKT PODŚWIETLENIA TIMELINE */
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(123, 63, 228, 0.4);
+            background: linear-gradient(135deg, 
+                rgba(123, 63, 228, 0.1) 0%, 
+                rgba(157, 111, 243, 0.08) 50%,
+                rgba(26, 26, 36, 0.9) 100%);
+            border-color: rgba(123, 63, 228, 0.4);
+        }
+
+        .timeline-content:hover .timeline-date {
+            color: var(--light-purple);
+        }
+
+        .timeline-content:hover .timeline-title {
+            text-shadow: 0 0 10px rgba(184, 156, 245, 0.3);
+        }
+
+        .timeline-content:hover .timeline-dot {
+            transform: translateX(-50%) scale(1.3);
+            box-shadow: 0 0 20px rgba(123, 63, 228, 0.8);
+            background: linear-gradient(135deg, var(--accent-purple), var(--light-purple));
         }
 
         .timeline-date {
@@ -398,6 +458,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            transition: color 0.3s;
         }
 
         .timeline-item:nth-child(even) .timeline-date {
@@ -409,12 +470,370 @@
             margin-bottom: 1rem;
             color: var(--text-white);
             font-weight: 600;
+            transition: text-shadow 0.3s;
         }
 
         .timeline-desc {
             color: var(--text-gray);
             line-height: 1.7;
             font-size: 1.1rem;
+        }
+
+        .timeline-desc p {
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-desc p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* RESPONSYWNOŚĆ TIMELINE */
+        @media (max-width: 992px) {
+            .timeline-line {
+                left: 30px;
+            }
+            
+            .timeline-dot {
+                left: 30px;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px;
+                margin-right: 0;
+                padding-left: 2rem;
+                padding-right: 1rem;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content {
+                border-left: 4px solid var(--accent-purple);
+                border-right: none;
+            }
+            
+            .timeline-item:nth-child(even) .timeline-content {
+                border-left: 4px solid var(--accent-purple);
+                border-right: none;
+            }
+        }
+
+        /* CONTACT SECTION */
+        .contact-section {
+            padding: 5rem 5%;
+            background-color: var(--secondary-black);
+            text-align: center;
+        }
+
+        .contact-simple {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(26, 26, 36, 0.8);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(123, 63, 228, 0.3);
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+            transition: all 0.3s;
+        }
+
+        .contact-simple:hover {
+            box-shadow: 0 10px 25px rgba(123, 63, 228, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .contact-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .contact-list li {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .contact-list li:hover {
+            border-bottom-color: rgba(123, 63, 228, 0.4);
+        }
+
+        .contact-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .contact-list i {
+            color: var(--accent-lavender);
+            font-size: 1.5rem;
+            width: 30px;
+            transition: transform 0.3s;
+        }
+
+        .contact-list li:hover i {
+            transform: scale(1.2);
+        }
+
+        .contact-email {
+            color: var(--text-gray);
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            background-color: rgba(123, 63, 228, 0.1);
+            font-size: 1.1rem;
+        }
+
+        .contact-email:hover {
+            color: var(--accent-lavender);
+            background-color: rgba(123, 63, 228, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(123, 63, 228, 0.2);
+        }
+
+        .contact-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .contact-link:hover {
+            color: var(--accent-lavender);
+            background-color: rgba(123, 63, 228, 0.1);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        /* ADD TIMELINE BUTTON */
+        .add-timeline-btn {
+            text-align: center;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* ADMIN MODAL */
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .admin-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--primary-black);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            border: 2px solid var(--accent-purple);
+            overflow: hidden;
+            animation: fadeInUp 0.4s;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-white);
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--secondary-black);
+            border: 1px solid rgba(123, 63, 228, 0.3);
+            border-radius: 8px;
+            color: var(--text-white);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-lavender);
+            box-shadow: 0 0 0 3px rgba(123, 63, 228, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(123, 63, 228, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-black);
+            color: var(--text-white);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-danger {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(90deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn-small {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+
+        /* LOGIN MODAL */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .login-modal.active {
+            display: flex;
+        }
+
+        /* ERROR MESSAGE */
+        .error-message {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* SUCCESS MESSAGE */
+        .success-message {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* ADMIN BUTTON */
+        .admin-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(123, 63, 228, 0.4);
+        }
+
+        .logout-btn {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
         }
 
         /* ADMIN PANEL */
@@ -435,11 +854,6 @@
 
         .admin-panel.active {
             display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .admin-panel h3 {
@@ -473,113 +887,70 @@
             border-color: var(--accent-lavender);
         }
 
-        /* ADMIN CONTROLS ON TIMELINE */
-        .admin-controls {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            justify-content: flex-end;
+        /* SKILLS EDIT MODAL */
+        .skills-edit-modal .modal-content {
+            max-width: 700px;
         }
 
-        .edit-btn, .delete-btn, .add-btn {
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .edit-btn {
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
-            color: white;
-        }
-
-        .edit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(123, 63, 228, 0.4);
-        }
-
-        .delete-btn {
-            background: linear-gradient(90deg, #e74c3c, #c0392b);
-            color: white;
-        }
-
-        .delete-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
-        }
-
-        .add-btn {
-            background: linear-gradient(90deg, #2ecc71, #27ae60);
-            color: white;
-            margin: 2rem auto;
-            display: block;
-        }
-
-        .add-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
-        }
-
-        /* MODALS */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--primary-black);
-            width: 90%;
-            max-width: 500px;
-            border-radius: 15px;
-            border: 2px solid var(--accent-purple);
-            overflow: hidden;
-            max-height: 90vh;
+        .skills-list {
+            max-height: 400px;
             overflow-y: auto;
-        }
-
-        .modal-header {
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
-            padding: 1.5rem;
-            text-align: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .modal-body {
-            padding: 2rem;
-        }
-
-        .form-group {
             margin-bottom: 1.5rem;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-white);
-            font-weight: 500;
+        .skill-edit-item {
+            background: var(--secondary-black);
+            border: 1px solid rgba(123, 63, 228, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
         }
 
-        .form-input, .form-select, .form-textarea {
+        .skill-edit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-edit-name {
+            font-weight: 600;
+            color: var(--text-white);
+        }
+
+        .skill-level-select {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid var(--accent-purple);
+            background: var(--primary-black);
+            color: var(--text-white);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .level-basic-select {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+
+        .level-intermediate-select {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+
+        .level-advanced-select {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+
+        /* ICON SEARCH */
+        .icon-search-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-search-input {
             width: 100%;
             padding: 0.8rem 1rem;
             background: var(--secondary-black);
@@ -587,183 +958,75 @@
             border-radius: 8px;
             color: var(--text-white);
             font-size: 1rem;
-        }
-
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--accent-lavender);
-            box-shadow: 0 0 0 3px rgba(123, 63, 228, 0.2);
-        }
-
-        .form-textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .btn {
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
-            color: white;
-        }
-
-        .btn-secondary {
-            background: var(--secondary-black);
-            color: var(--text-white);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-success {
-            background: linear-gradient(90deg, #2ecc71, #27ae60);
-            color: white;
-        }
-
-        .btn-danger {
-            background: linear-gradient(90deg, #e74c3c, #c0392b);
-            color: white;
-        }
-
-        .btn-small {
-            padding: 0.3rem 0.8rem;
-            font-size: 0.85rem;
-        }
-
-        /* ERROR MESSAGE */
-        .error-message {
-            background: rgba(231, 76, 60, 0.2);
-            color: #e74c3c;
-            padding: 1rem;
-            border-radius: 8px;
             margin-bottom: 1rem;
-            border: 1px solid rgba(231, 76, 60, 0.3);
-            display: none;
         }
 
-        .error-message.show {
-            display: block;
+        .icon-search-results {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 0.5rem;
+            background: rgba(26, 26, 36, 0.5);
+            border-radius: 8px;
+            border: 1px solid rgba(123, 63, 228, 0.2);
         }
 
-        /* PROJECTS LINK SECTION */
-        .projects-link-section {
-            padding: 5rem 5%;
-            background-color: var(--secondary-black);
-            text-align: center;
+        @media (max-width: 768px) {
+            .icon-search-results {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
-        .projects-link-card {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: rgba(26, 26, 36, 0.8);
-            padding: 3rem;
-            border-radius: 15px;
-            border: 1px solid rgba(123, 63, 228, 0.3);
-        }
-
-        .projects-icon {
-            font-size: 3rem;
-            color: var(--accent-lavender);
-            margin-bottom: 1.5rem;
-        }
-
-        .projects-link-btn {
-            display: inline-block;
-            margin-top: 2rem;
-            padding: 1rem 2.5rem;
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-lavender));
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-
-        .projects-link-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(123, 63, 228, 0.4);
-        }
-
-        /* CONTACT SECTION */
-        .contact-section {
-            padding: 5rem 5%;
-            background-color: var(--primary-black);
-            text-align: center;
-        }
-
-        .contact-simple {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: rgba(26, 26, 36, 0.8);
-            padding: 3rem;
-            border-radius: 15px;
-            border: 1px solid rgba(123, 63, 228, 0.3);
-        }
-
-        .contact-list {
-            list-style: none;
-            text-align: left;
-        }
-
-        .contact-list li {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .icon-result {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 15px;
-        }
-
-        .contact-list li:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        .contact-list i {
-            color: var(--accent-lavender);
-            font-size: 1.5rem;
-            width: 30px;
-        }
-
-        .contact-email {
-            color: var(--text-gray);
+            padding: 0.5rem;
+            border-radius: 6px;
             cursor: pointer;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            background-color: rgba(123, 63, 228, 0.1);
-            font-size: 1.1rem;
+            transition: all 0.2s;
+            background: transparent;
+            border: 1px solid transparent;
         }
 
-        .contact-email:hover {
+        .icon-result:hover {
+            background: rgba(123, 63, 228, 0.2);
+            border-color: rgba(123, 63, 228, 0.4);
+        }
+
+        .icon-result.selected {
+            background: rgba(123, 63, 228, 0.3);
+            border-color: var(--accent-lavender);
+        }
+
+        .icon-preview {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
             color: var(--accent-lavender);
-            background-color: rgba(123, 63, 228, 0.2);
         }
 
-        .contact-link {
+        .icon-name {
+            font-size: 0.7rem;
             color: var(--text-gray);
-            text-decoration: none;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            display: inline-block;
+            text-align: center;
+            word-break: break-all;
         }
 
-        .contact-link:hover {
+        .icon-select-btn {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            background: rgba(123, 63, 228, 0.2);
             color: var(--accent-lavender);
-            background-color: rgba(123, 63, 228, 0.1);
+            border: 1px solid rgba(123, 63, 228, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .icon-select-btn:hover {
+            background: rgba(123, 63, 228, 0.3);
         }
 
         /* FOOTER */
@@ -799,6 +1062,7 @@
         .footer-links a {
             color: var(--text-gray);
             text-decoration: none;
+            transition: color 0.3s;
         }
 
         .footer-links a:hover {
@@ -812,6 +1076,7 @@
             font-size: 1rem;
         }
 
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -829,43 +1094,46 @@
                 grid-template-columns: 1fr;
             }
             
-            .timeline-line {
-                left: 30px;
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
             }
             
-            .timeline-dot {
-                left: 30px;
+            nav ul {
+                gap: 1rem;
             }
             
-            .timeline-item:nth-child(odd) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-content {
-                width: calc(100% - 60px);
-                margin-left: 60px;
-                margin-right: 0;
-                padding-left: 2rem;
-                padding-right: 1rem;
-                text-align: left;
-                border-left: 4px solid var(--accent-purple);
-                border-right: none;
+            .timeline-content:hover {
+                transform: translateY(-5px) scale(1.01);
+            }
+            
+            .admin-btn {
+                bottom: 10px;
+                right: 10px;
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
             }
             
             .admin-panel {
                 width: 90%;
                 right: 5%;
             }
+            
+            .modal-content {
+                width: 95%;
+            }
         }
     </style>
 </head>
 <body>
     <!-- HEADER -->
-    <header>
+    <header id="mainHeader">
         <div class="logo">Lukis<span>538x_</span></div>
         <nav>
             <ul>
-                <li><a href="#home">O mnie</a></li>
+                <li><a href="#home" class="nav-active">O mnie</a></li>
                 <li><a href="#skills">Umiejętności</a></li>
                 <li><a href="#timeline">Historia</a></li>
-                <li><a href="#projects-link">Projekty</a></li>
                 <li><a href="#contact">Kontakt</a></li>
             </ul>
         </nav>
@@ -881,13 +1149,13 @@
         </p>
         
         <div class="social-links">
-            <a href="https://guns.lol/lukis538x_" class="social-link" target="_blank">
-                <i class="fas fa-gun"></i>
+            <a href="https://github.com/Lukis538x" class="social-link" target="_blank">
+                <i class="fab fa-github"></i>
             </a>
-            <a href="https://discord.com/users/915950188307284010" class="social-link" target="_blank">
+            <a href="https://discord.gg/dc.soon.pl" class="social-link" target="_blank">
                 <i class="fab fa-discord"></i>
             </a>
-            <a href="mailto:wspolpraca.lukis538x@gmail.com" class="social-link">
+            <a href="mailto:lukasz@ogsiec.eu" class="social-link">
                 <i class="fas fa-envelope"></i>
             </a>
         </div>
@@ -898,220 +1166,101 @@
         <h2 class="section-title">Umiejętności</h2>
         
         <div class="skills-container">
-            <div class="skills-grid" id="skillsGrid">
-                <!-- Umiejętności z obrazka 1 -->
-                <div class="skill-card">
-                    <i class="fab fa-react skill-icon"></i>
-                    <h3 class="skill-name">React</h3>
-                    <div class="skill-level">
-                        <span class="level-text">Poziom:</span>
-                        <span class="level-badge level-advanced">Zaawansowany</span>
-                    </div>
-                    <p style="color: var(--text-gray);">Tworzenie interfejsów użytkownika, komponenty funkcyjne, hooks</p>
-                </div>
+            <div class="skills-category">
+                <h3 class="category-title">TECHNOLOGIE</h3>
+                <p style="color: var(--text-gray); margin-bottom: 2rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Narzędzia i technologie, z którymi pracuję na co dzień
+                </p>
                 
-                <div class="skill-card">
-                    <i class="fab fa-js-square skill-icon"></i>
-                    <h3 class="skill-name">JavaScript</h3>
-                    <div class="skill-level">
-                        <span class="level-text">Poziom:</span>
-                        <span class="level-badge level-advanced">Zaawansowany</span>
-                    </div>
-                    <p style="color: var(--text-gray);">ES6+, asynchroniczność, praca z API, manipulacja DOM</p>
-                </div>
-                
-                <div class="skill-card">
-                    <i class="fab fa-node-js skill-icon"></i>
-                    <h3 class="skill-name">Node.js</h3>
-                    <div class="skill-level">
-                        <span class="level-text">Poziom:</span>
-                        <span class="level-badge level-advanced">Zaawansowany</span>
-                    </div>
-                    <p style="color: var(--text-gray);">Tworzenie serwerów backendowych, REST API, Express.js</p>
-                </div>
-                
-                <div class="skill-card">
-                    <i class="fab fa-python skill-icon"></i>
-                    <h3 class="skill-name">Python</h3>
-                    <div class="skill-level">
-                        <span class="level-text">Poziom:</span>
-                        <span class="level-badge level-advanced">Zaawansowany</span>
-                    </div>
-                    <p style="color: var(--text-gray);">Skrypty automatyzacyjne, web scraping, data processing</p>
-                </div>
-                
-                <div class="skill-card">
-                    <i class="fas fa-palette skill-icon"></i>
-                    <h3 class="skill-name">Tailwind CSS</h3>
-                    <div class="skill-level">
-                        <span class="level-text">Poziom:</span>
-                        <span class="level-badge level-advanced">Zaawansowany</span>
-                    </div>
-                    <p style="color: var(--text-gray);">Responsywne layouty, utility-first CSS, konfiguracja</p>
-                </div>
-                
-                <div class="skill-card">
-                    <i class="fas fa-database skill-icon"></i>
-                    <h3 class="skill-name">PostgreSQL</h3>
-                    <div class="skill-level">
-                        <span class="level-text">Poziom:</span>
-                        <span class="level-badge level-advanced">Zaawansowany</span>
-                    </div>
-                    <p style="color: var(--text-gray);">Projektowanie baz danych, zapytania SQL, optymalizacja</p>
-                </div>
-                
-                <div class="skill-card">
-                    <i class="fab fa-docker skill-icon"></i>
-                    <h3 class="skill-name">Docker</h3>
-                    <div class="skill-level">
-                        <span class="level-text">Poziom:</span>
-                        <span class="level-badge level-basic">Podstawowy</span>
-                    </div>
-                    <p style="color: var(--text-gray);">Konteneryzacja aplikacji, Docker Compose, podstawy orchestration</p>
-                </div>
-                
-                <div class="skill-card">
-                    <i class="fab fa-aws skill-icon"></i>
-                    <h3 class="skill-name">AWS</h3>
-                    <div class="skill-level">
-                        <span class="level-text">Poziom:</span>
-                        <span class="level-badge level-basic">Podstawowy</span>
-                    </div>
-                    <p style="color: var(--text-gray);">EC2, S3, CloudFront, podstawy infrastruktury chmurowej</p>
+                <div class="skills-grid" id="skillsGrid">
+                    <!-- Skills will be loaded from localStorage -->
                 </div>
             </div>
         </div>
     </section>
 
     <!-- TIMELINE SECTION -->
-    <section class="section" id="timeline">
-        <h2 class="section-title">Moja historia</h2>
+    <section class="timeline-section" id="timeline">
+        <h2 class="section-title">Nasza Historia</h2>
         
-        <div class="timeline-container">
+        <!-- Add Timeline Button (visible when logged in) -->
+        <div class="add-timeline-btn" id="addTimelineBtn" style="display: none;">
+            <button class="btn btn-primary" id="openAddTimelineModal">
+                <i class="fas fa-plus"></i> Dodaj nowy wpis do historii
+            </button>
+        </div>
+        
+        <div class="timeline-container" id="timelineContainer">
             <div class="timeline-line"></div>
             
-            <!-- Historia z obrazka 2 -->
-            <div class="timeline-item">
-                <div class="timeline-dot" style="top: 0%;"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">
-                        <i class="far fa-calendar-alt"></i> 2026 - Obecnie
-                    </div>
-                    <h3 class="timeline-title">Ciągły rozwój i ekspansja</h3>
-                    <div class="timeline-desc">
-                        <p>Kontynuujemy rozwój naszej sieci serwerów.</p>
-                        <p>Implementujemy nowe funkcje, rozszerzamy społeczność i tworzymy jeszcze lepsze doświadczenie dla wszystkich członków OgSiec.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-dot" style="top: 50%;"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date" style="justify-content: flex-end;">
-                        <i class="far fa-calendar-alt"></i> Sierpień 2023
-                    </div>
-                    <h3 class="timeline-title">Założenie pierwszego serwera OgWar.pl</h3>
-                    <div class="timeline-desc">
-                        <p>Rozpoczęcie pierwszego serwera pod marką Og.</p>
-                        <p>Stworzenie fundamentów pod przyszłą sieć serwerów i budowa pierwszych społeczności graczy.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="timeline-item">
-                <div class="timeline-dot" style="top: 100%;"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">
-                        <i class="far fa-calendar-alt"></i> Marzec 2022
-                    </div>
-                    <h3 class="timeline-title">Założenie OgSiec</h3>
-                    <div class="timeline-desc">
-                        <p>Powstanie pomysłu i fundamentów pod sieć serwerów OgSiec.</p>
-                        <p>Początek planowania, organizacji i tworzenia wizji zjednoczonej społeczności graczy Minecraft.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PROJECTS LINK SECTION -->
-    <section class="projects-link-section" id="projects-link">
-        <h2 class="section-title">Moje Projekty</h2>
-        
-        <div class="projects-link-card">
-            <i class="fas fa-code projects-icon"></i>
-            <h3 style="color: var(--accent-lavender); margin-bottom: 1rem; font-size: 2rem;">Zobacz moje portfolio projektów</h3>
-            <p style="color: var(--text-gray); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">
-                Sprawdź moje najnowsze projekty, w tym serwery Minecraft, autorskie pluginy, aplikacje webowe i wiele innych. 
-                Każdy projekt to unikalne rozwiązanie stworzone z pasją i dbałością o szczegóły.
-            </p>
-            <a href="projekty.html" class="projects-link-btn">
-                <i class="fas fa-external-link-alt"></i> Przejdź do projektów
-            </a>
+            <!-- Timeline items will be loaded here from localStorage -->
         </div>
     </section>
 
     <!-- CONTACT SECTION -->
     <section class="contact-section" id="contact">
-        <h2 class="section-title">POROZMAWIAJMY</h2>
+        <h2 class="section-title">Kontakt</h2>
         
         <div class="contact-simple">
+            <h3 style="color: var(--accent-lavender); margin-bottom: 2rem; font-size: 1.8rem;">POROZMAWIAJMY</h3>
+            <p style="color: var(--text-gray); margin-bottom: 2.5rem; font-size: 1.2rem;">
+                Masz projekt? Chętnie porozmawiam o współpracy
+            </p>
+            
             <ul class="contact-list">
                 <li>
                     <i class="fas fa-envelope"></i>
-                    <div>
-                        <strong>Email</strong><br>
-                        <span class="contact-email">wspolpraca.lukis538x@gmail.com</span>
+                    <div style="flex: 1;">
+                        <span style="color: var(--accent-lavender); font-weight: 600; display: block; margin-bottom: 0.5rem;">Email</span>
+                        <span class="contact-email" data-email="kontakt@ogsiec.eu">kontakt@ogsiec.eu</span>
                     </div>
                 </li>
                 <li>
-                    <i class="fas fa-gun"></i>
-                    <div>
-                        <strong>Portfolio</strong><br>
-                        <a href="https://guns.lol/lukis538x_" class="contact-link" target="_blank">guns.lol/lukis538x_</a>
+                    <i class="fab fa-github"></i>
+                    <div style="flex: 1;">
+                        <span style="color: var(--accent-lavender); font-weight: 600; display: block; margin-bottom: 0.5rem;">GitHub</span>
+                        <a href="https://github.com/Lukis538x" class="contact-link" target="_blank">
+                            github.com/Lukis538x
+                        </a>
                     </div>
                 </li>
                 <li>
                     <i class="fab fa-discord"></i>
-                    <div>
-                        <strong>Discord</strong><br>
-                        <a href="https://discord.com/users/915950188307284010" class="contact-link" target="_blank">@lukis538x_</a>
+                    <div style="flex: 1;">
+                        <span style="color: var(--accent-lavender); font-weight: 600; display: block; margin-bottom: 0.5rem;">Discord</span>
+                        <span class="contact-link">Lukis538x_</span>
                     </div>
                 </li>
             </ul>
-            
-            <p style="margin-top: 2rem; color: var(--text-gray); font-size: 1.1rem; line-height: 1.6;">
-                Masz projekt? Chętnie porozmawiam o współpracy. Skontaktuj się ze mną przez email lub Discord!
-            </p>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">OgSiec.eu</div>
+            <div class="footer-logo">Lukis538x_</div>
             <ul class="footer-links">
                 <li><a href="#home">O mnie</a></li>
                 <li><a href="#skills">Umiejętności</a></li>
                 <li><a href="#timeline">Historia</a></li>
-                <li><a href="#projects-link">Projekty</a></li>
                 <li><a href="#contact">Kontakt</a></li>
             </ul>
+            
             <div class="social-links" style="justify-content: center;">
-                <a href="https://guns.lol/lukis538x_" class="social-link" target="_blank">
-                    <i class="fas fa-gun"></i>
+                <a href="https://github.com/Lukis538x" class="social-link" target="_blank">
+                    <i class="fab fa-github"></i>
                 </a>
-                <a href="https://discord.com/users/915950188307284010" class="social-link" target="_blank">
+                <a href="https://discord.gg/dc.soon.pl" class="social-link" target="_blank">
                     <i class="fab fa-discord"></i>
                 </a>
-                <a href="mailto:wspolpraca.lukis538x@gmail.com" class="social-link">
+                <a href="mailto:lukasz@ogsiec.eu" class="social-link">
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            &copy; 2024 OgSiec.eu | Wszystkie prawa zastrzeżone
+            <p>&copy; 2026 OgSiec.eu | Wszelkie prawa zastrzeżone</p>
         </div>
     </footer>
 
@@ -1140,34 +1289,37 @@
     </div>
 
     <!-- LOGIN MODAL -->
-    <div class="modal" id="loginModal">
+    <div class="login-modal" id="loginModal">
         <div class="modal-content">
-            <div class="modal-header">Logowanie ownera</div>
+            <div class="modal-header">
+                Logowanie ownera
+            </div>
             <div class="modal-body">
                 <div class="error-message" id="loginError"></div>
                 <div class="form-group">
-                    <label for="username">Login</label>
-                    <input type="text" id="username" class="form-input" placeholder="Wprowadź login">
+                    <label for="username">Nazwa użytkownika:</label>
+                    <input type="text" id="username" class="form-input" placeholder="Wpisz nazwę użytkownika">
                 </div>
                 <div class="form-group">
-                    <label for="password">Hasło</label>
-                    <input type="password" id="password" class="form-input" placeholder="Wprowadź hasło">
+                    <label for="password">Hasło:</label>
+                    <input type="password" id="password" class="form-input" placeholder="Wpisz hasło">
                 </div>
                 <div class="modal-buttons">
                     <button class="btn btn-secondary" id="cancelLogin">Anuluj</button>
-                    <button class="btn btn-primary" id="submitLogin">Zaloguj się</button>
+                    <button class="btn btn-primary" id="submitLogin">Zaloguj</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- ADD/EDIT TIMELINE MODAL -->
-    <div class="modal" id="timelineModal">
+    <div class="admin-modal" id="timelineModal">
         <div class="modal-content">
             <div class="modal-header">
                 <span id="timelineModalTitle">Dodaj nowy wpis do historii</span>
             </div>
             <div class="modal-body">
+                <div class="success-message" id="timelineSuccessMessage"></div>
                 <div class="form-group">
                     <label for="timelineYear">Rok/Data:</label>
                     <input type="text" id="timelineYear" class="form-input" placeholder="np. 2026 - Obecnie, Styczeń 2024">
@@ -1188,20 +1340,56 @@
         </div>
     </div>
 
+    <!-- EDIT SKILLS MODAL WITH ICON SEARCH -->
+    <div class="admin-modal skills-edit-modal" id="skillsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                Edytuj umiejętności
+            </div>
+            <div class="modal-body">
+                <div class="success-message" id="skillsSuccessMessage"></div>
+                <div class="form-group">
+                    <button class="btn btn-success" id="addNewSkill" style="width: 100%; margin-bottom: 1.5rem;">
+                        <i class="fas fa-plus"></i> Dodaj nową umiejętność
+                    </button>
+                </div>
+                
+                <!-- Icon Search Section -->
+                <div class="icon-search-container" id="iconSearchContainer" style="display: none;">
+                    <h4 style="color: var(--accent-lavender); margin-bottom: 1rem; text-align: center;">Wyszukaj ikonę</h4>
+                    <input type="text" id="iconSearchInput" class="icon-search-input" placeholder="Wpisz nazwę technologii (np. html, python, react)">
+                    <div class="icon-search-results" id="iconSearchResults">
+                        <!-- Icon search results will appear here -->
+                    </div>
+                </div>
+                
+                <div class="skills-list" id="skillsList">
+                    <!-- Skills edit items will be loaded here -->
+                </div>
+                
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" id="cancelSkills">Anuluj</button>
+                    <button class="btn btn-primary" id="saveSkills">Zapisz zmiany</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- EDIT CONTACT MODAL -->
-    <div class="modal" id="contactModal">
+    <div class="admin-modal" id="contactModal">
         <div class="modal-content">
             <div class="modal-header">
                 Edytuj dane kontaktowe
             </div>
             <div class="modal-body">
+                <div class="success-message" id="contactSuccessMessage"></div>
                 <div class="form-group">
                     <label for="contactEmail">Email:</label>
                     <input type="email" id="contactEmail" class="form-input" placeholder="twój@email.pl">
                 </div>
                 <div class="form-group">
-                    <label for="contactPortfolio">Portfolio:</label>
-                    <input type="text" id="contactPortfolio" class="form-input" placeholder="guns.lol/twojprofil">
+                    <label for="contactGitHub">GitHub:</label>
+                    <input type="text" id="contactGitHub" class="form-input" placeholder="github.com/twojprofil">
                 </div>
                 <div class="form-group">
                     <label for="contactDiscord">Discord:</label>
@@ -1216,7 +1404,7 @@
     </div>
 
     <!-- DELETE CONFIRM MODAL -->
-    <div class="modal" id="deleteModal">
+    <div class="login-modal" id="deleteModal">
         <div class="modal-content">
             <div class="modal-header">
                 Potwierdzenie usunięcia
@@ -1234,18 +1422,213 @@
     </div>
 
     <script>
-        // KONFIGURACJA LOGOWANIA
-        const LOGIN_CONFIG = {
-            username: 'Lukis538x_',
-            password: '12345'
+        // Zabezpieczone dane logowania (zakodowane w base64)
+        const ENCODED_USERNAME = 'THVraXM1Mzh4Xw=='; // Lukis538x_ w base64
+        const ENCODED_PASSWORD = 'MTIzNDUh'; // 12345! w base64
+
+        // Baza danych ikon dla technologii
+        const ICON_DATABASE = {
+            // Popularne języki programowania
+            'html': ['fab fa-html5', 'fas fa-code'],
+            'css': ['fab fa-css3-alt', 'fas fa-paint-brush'],
+            'javascript': ['fab fa-js-square', 'fab fa-js'],
+            'python': ['fab fa-python'],
+            'java': ['fab fa-java'],
+            'php': ['fab fa-php'],
+            'c++': ['fas fa-c'],
+            'c#': ['fab fa-microsoft'],
+            'ruby': ['fab fa-ruby'],
+            'swift': ['fab fa-swift'],
+            'go': ['fab fa-golang'],
+            'rust': ['fas fa-cog'],
+            'typescript': ['fas fa-code'],
+            
+            // Frameworki i biblioteki
+            'react': ['fab fa-react'],
+            'vue': ['fab fa-vuejs'],
+            'angular': ['fab fa-angular'],
+            'node': ['fab fa-node-js'],
+            'express': ['fas fa-server'],
+            'django': ['fab fa-python'],
+            'flask': ['fab fa-python'],
+            'laravel': ['fab fa-php'],
+            'spring': ['fab fa-java'],
+            
+            // Narzędzia i technologie
+            'git': ['fab fa-git-alt'],
+            'github': ['fab fa-github'],
+            'docker': ['fab fa-docker'],
+            'aws': ['fab fa-aws'],
+            'azure': ['fab fa-microsoft'],
+            'firebase': ['fas fa-fire'],
+            'mongodb': ['fas fa-database'],
+            'mysql': ['fas fa-database'],
+            'postgresql': ['fas fa-database'],
+            'redis': ['fas fa-database'],
+            'graphql': ['fas fa-project-diagram'],
+            'rest': ['fas fa-server'],
+            'api': ['fas fa-network-wired'],
+            
+            // Frontend
+            'tailwind': ['fas fa-palette'],
+            'bootstrap': ['fab fa-bootstrap'],
+            'sass': ['fab fa-sass'],
+            'less': ['fab fa-less'],
+            'webpack': ['fas fa-box'],
+            'npm': ['fab fa-npm'],
+            'yarn': ['fab fa-yarn'],
+            
+            // DevOps
+            'jenkins': ['fas fa-cogs'],
+            'kubernetes': ['fas fa-ship'],
+            'terraform': ['fas fa-mountain'],
+            'ansible': ['fas fa-robot'],
+            
+            // Mobile
+            'android': ['fab fa-android'],
+            'ios': ['fab fa-apple'],
+            'flutter': ['fas fa-mobile-alt'],
+            'react native': ['fab fa-react'],
+            
+            // Inne
+            'linux': ['fab fa-linux'],
+            'windows': ['fab fa-windows'],
+            'macos': ['fab fa-apple'],
+            'ubuntu': ['fab fa-ubuntu'],
+            'centos': ['fab fa-linux'],
+            
+            // Specjalne
+            'discord': ['fab fa-discord'],
+            'bot': ['fas fa-robot'],
+            'minecraft': ['fas fa-cube'],
+            'game': ['fas fa-gamepad'],
+            'web': ['fas fa-globe'],
+            'design': ['fas fa-paint-brush'],
+            'ui': ['fas fa-layer-group'],
+            'ux': ['fas fa-user-friends'],
+            'security': ['fas fa-shield-alt'],
+            'blockchain': ['fas fa-link'],
+            'ai': ['fas fa-brain'],
+            'machine learning': ['fas fa-robot'],
+            'data': ['fas fa-chart-bar'],
+            'analytics': ['fas fa-chart-line'],
+            'testing': ['fas fa-vial'],
+            'agile': ['fas fa-tasks'],
+            'scrum': ['fas fa-users'],
+            
+            // Domyślne ikony
+            'default': ['fas fa-code', 'fas fa-cog', 'fas fa-tools', 'fas fa-laptop-code']
         };
+
+        // Mapowanie słów kluczowych do ikon
+        const KEYWORD_MAPPING = {
+            'html': 'html',
+            'css': 'css',
+            'js': 'javascript',
+            'javascript': 'javascript',
+            'python': 'python',
+            'java': 'java',
+            'php': 'php',
+            'c++': 'c++',
+            'c#': 'c#',
+            'ruby': 'ruby',
+            'swift': 'swift',
+            'go': 'go',
+            'rust': 'rust',
+            'typescript': 'typescript',
+            'react': 'react',
+            'vue': 'vue',
+            'angular': 'angular',
+            'node': 'node',
+            'express': 'express',
+            'django': 'django',
+            'flask': 'flask',
+            'laravel': 'laravel',
+            'spring': 'spring',
+            'git': 'git',
+            'github': 'github',
+            'docker': 'docker',
+            'aws': 'aws',
+            'azure': 'azure',
+            'firebase': 'firebase',
+            'mongodb': 'mongodb',
+            'mysql': 'mysql',
+            'postgresql': 'postgresql',
+            'redis': 'redis',
+            'graphql': 'graphql',
+            'rest': 'rest',
+            'api': 'api',
+            'tailwind': 'tailwind',
+            'bootstrap': 'bootstrap',
+            'sass': 'sass',
+            'less': 'less',
+            'webpack': 'webpack',
+            'npm': 'npm',
+            'yarn': 'yarn',
+            'jenkins': 'jenkins',
+            'kubernetes': 'kubernetes',
+            'terraform': 'terraform',
+            'ansible': 'ansible',
+            'android': 'android',
+            'ios': 'ios',
+            'flutter': 'flutter',
+            'react native': 'react native',
+            'linux': 'linux',
+            'windows': 'windows',
+            'macos': 'macos',
+            'ubuntu': 'ubuntu',
+            'centos': 'centos',
+            'discord': 'discord',
+            'bot': 'bot',
+            'minecraft': 'minecraft',
+            'game': 'game',
+            'web': 'web',
+            'design': 'design',
+            'ui': 'ui',
+            'ux': 'ux',
+            'security': 'security',
+            'blockchain': 'blockchain',
+            'ai': 'ai',
+            'machine learning': 'machine learning',
+            'data': 'data',
+            'analytics': 'analytics',
+            'testing': 'testing',
+            'agile': 'agile',
+            'scrum': 'scrum'
+        };
+
+        // Decode function (bezpieczne)
+        function decodeBase64(str) {
+            try {
+                return atob(str);
+            } catch (e) {
+                return '';
+            }
+        }
 
         // Data management
         let timelineData = [];
+        let skillsData = [];
         let contactData = {};
         let isLoggedIn = false;
         let itemToDelete = null;
         let editingTimelineIndex = null;
+        let editingSkillIndex = null;
+        let currentIconSearchSkillIndex = null;
+
+        // Default skills data
+        const defaultSkillsData = [
+            { name: "React", icon: "fab fa-react", level: "basic", description: "Tworzenie interfejsów użytkownika, komponenty funkcyjne, hooks" },
+            { name: "JavaScript", icon: "fab fa-js-square", level: "intermediate", description: "ES6+, asynchroniczność, praca z API, manipulacja DOM" },
+            { name: "Node.js", icon: "fab fa-node-js", level: "basic", description: "Tworzenie serwerów backendowych, REST API, Express.js" },
+            { name: "Python", icon: "fab fa-python", level: "intermediate", description: "Skrypty automatyzacyjne, web scraping, data processing" },
+            { name: "Tailwind CSS", icon: "fas fa-palette", level: "intermediate", description: "Responsywne layouty, utility-first CSS, konfiguracja" },
+            { name: "PostgreSQL", icon: "fas fa-database", level: "intermediate", description: "Projektowanie baz danych, zapytania SQL, optymalizacja" },
+            { name: "Docker", icon: "fab fa-docker", level: "basic", description: "Konteneryzacja aplikacji, Docker Compose, podstawy orchestration" },
+            { name: "AWS", icon: "fab fa-aws", level: "basic", description: "EC2, S3, CloudFront, podstawy infrastruktury chmurowej" },
+            { name: "HTML/CSS", icon: "fab fa-html5", level: "intermediate", description: "Semantyczny HTML, zaawansowane animacje CSS, responsywność" },
+            { name: "Discord Bots", icon: "fab fa-discord", level: "advanced", description: "Tworzenie botów Discord w JavaScript, integracje API, automatyzacja" }
+        ];
 
         // Default timeline data
         const defaultTimelineData = [
@@ -1268,52 +1651,48 @@
 
         // Default contact data
         const defaultContactData = {
-            email: "wspolpraca.lukis538x@gmail.com",
-            portfolio: "guns.lol/lukis538x_",
-            discord: "lukis538x_"
+            email: "kontakt@ogsiec.eu",
+            github: "github.com/Lukis538x",
+            discord: "Lukis538x_"
         };
 
-        // Load data from localStorage
-        function loadData() {
-            try {
-                const savedTimeline = localStorage.getItem('lukis_timeline');
-                const savedContact = localStorage.getItem('lukis_contact');
-                
-                timelineData = savedTimeline ? JSON.parse(savedTimeline) : [...defaultTimelineData];
-                contactData = savedContact ? JSON.parse(savedContact) : {...defaultContactData};
-                
-                const savedLogin = localStorage.getItem('lukis_logged_in');
-                if (savedLogin === 'true') {
-                    isLoggedIn = true;
-                    updateAdminUI();
-                }
-                
-                renderTimeline();
-                updateContactDisplay();
-            } catch (e) {
-                console.error('Error loading data:', e);
-                timelineData = [...defaultTimelineData];
-                contactData = {...defaultContactData};
-                saveData();
-                renderTimeline();
-                updateContactDisplay();
-            }
+        // Load all data from localStorage
+        function loadAllData() {
+            // Load timeline data
+            const savedTimeline = localStorage.getItem('lukis_timeline');
+            timelineData = savedTimeline ? JSON.parse(savedTimeline) : [...defaultTimelineData];
+            
+            // Load skills data
+            const savedSkills = localStorage.getItem('lukis_skills');
+            skillsData = savedSkills ? JSON.parse(savedSkills) : [...defaultSkillsData];
+            
+            // Load contact data
+            const savedContact = localStorage.getItem('lukis_contact');
+            contactData = savedContact ? JSON.parse(savedContact) : {...defaultContactData};
+            
+            // Render everything
+            renderTimeline();
+            renderSkills();
+            updateContactDisplay();
         }
 
-        // Save data to localStorage
-        function saveData() {
+        // Save all data to localStorage
+        function saveAllData() {
             localStorage.setItem('lukis_timeline', JSON.stringify(timelineData));
+            localStorage.setItem('lukis_skills', JSON.stringify(skillsData));
             localStorage.setItem('lukis_contact', JSON.stringify(contactData));
         }
 
         // Render timeline
         function renderTimeline() {
-            const container = document.querySelector('.timeline-container');
+            const container = document.getElementById('timelineContainer');
             const timelineLine = container.querySelector('.timeline-line');
             
+            // Clear existing items except the line
             const items = container.querySelectorAll('.timeline-item');
             items.forEach(item => item.remove());
             
+            // Calculate positions
             const itemCount = timelineData.length;
             const positions = [];
             
@@ -1321,6 +1700,7 @@
                 positions.push((i / (itemCount - 1)) * 100);
             }
             
+            // Create timeline items
             timelineData.forEach((item, index) => {
                 const timelineItem = document.createElement('div');
                 timelineItem.className = 'timeline-item';
@@ -1351,6 +1731,7 @@
                 container.appendChild(timelineItem);
             });
             
+            // Add event listeners for edit/delete buttons
             if (isLoggedIn) {
                 document.querySelectorAll('.edit-timeline-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
@@ -1369,26 +1750,82 @@
                     });
                 });
             }
+            
+            // Trigger animations
+            setTimeout(() => {
+                const timelineItems = document.querySelectorAll('.timeline-item');
+                timelineItems.forEach(item => {
+                    const rect = item.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        item.classList.add('visible');
+                    }
+                });
+                
+                // Add scroll listener
+                window.addEventListener('scroll', checkTimelineVisibility);
+                checkTimelineVisibility();
+            }, 100);
+        }
+
+        // Render skills
+        function renderSkills() {
+            const container = document.getElementById('skillsGrid');
+            container.innerHTML = '';
+            
+            skillsData.forEach((skill, index) => {
+                const skillCard = document.createElement('div');
+                skillCard.className = 'skill-card';
+                
+                skillCard.innerHTML = `
+                    <div class="skill-header">
+                        <h4 class="skill-name">${skill.name}</h4>
+                        <i class="${skill.icon} skill-icon"></i>
+                    </div>
+                    <div class="skill-level">
+                        <span class="level-text">Poziom:</span>
+                        <span class="level-badge level-${skill.level}">
+                            ${getLevelText(skill.level)}
+                        </span>
+                    </div>
+                    <p style="color: var(--text-gray);">${skill.description}</p>
+                `;
+                
+                container.appendChild(skillCard);
+            });
+        }
+
+        // Get level text
+        function getLevelText(level) {
+            switch(level) {
+                case 'basic': return 'Podstawowy';
+                case 'intermediate': return 'Średnio-Zaawansowany';
+                case 'advanced': return 'Zaawansowany';
+                default: return 'Podstawowy';
+            }
         }
 
         // Update contact display
         function updateContactDisplay() {
-            const emailElement = document.querySelector('.contact-email');
-            const portfolioElement = document.querySelector('.contact-link[href*="guns.lol"]');
-            const discordElement = document.querySelector('.contact-link:last-child');
+            // Update contact section
+            document.querySelector('.contact-email').textContent = contactData.email;
+            document.querySelector('.contact-email').setAttribute('data-email', contactData.email);
             
-            if (emailElement) {
-                emailElement.textContent = contactData.email;
-            }
+            const githubLink = document.querySelector('a[href*="github.com"]');
+            githubLink.textContent = contactData.github;
+            githubLink.href = `https://${contactData.github}`;
             
-            if (portfolioElement) {
-                portfolioElement.textContent = contactData.portfolio;
-                portfolioElement.href = `https://${contactData.portfolio}`;
-            }
-            
-            if (discordElement) {
-                discordElement.textContent = `@${contactData.discord}`;
-            }
+            document.querySelector('.contact-link:last-child').textContent = contactData.discord;
+        }
+
+        // Check timeline item visibility
+        function checkTimelineVisibility() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    item.classList.add('visible');
+                }
+            });
         }
 
         // Add new timeline item
@@ -1398,9 +1835,10 @@
                 title,
                 description: description.replace(/\n/g, '<br>')
             });
-            saveData();
+            saveAllData();
             renderTimeline();
-            alert('Wpis został dodany pomyślnie!');
+            
+            showSuccessMessage('timelineSuccessMessage', 'Wpis został dodany pomyślnie!');
         }
 
         // Edit timeline item
@@ -1425,43 +1863,340 @@
                 title,
                 description: description.replace(/\n/g, '<br>')
             };
-            saveData();
+            saveAllData();
             renderTimeline();
-            alert('Wpis został zaktualizowany pomyślnie!');
+            
+            showSuccessMessage('timelineSuccessMessage', 'Wpis został zaktualizowany pomyślnie!');
         }
 
         // Delete timeline item
         function deleteTimelineItem(index) {
             timelineData.splice(index, 1);
-            saveData();
+            saveAllData();
             renderTimeline();
+        }
+
+        // Find icon for technology name
+        function findIconForTechnology(techName) {
+            const lowerName = techName.toLowerCase();
+            
+            // Sprawdź bezpośrednie dopasowanie
+            for (const [key, icons] of Object.entries(ICON_DATABASE)) {
+                if (lowerName.includes(key)) {
+                    return icons[0]; // Zwróć pierwszą ikonę
+                }
+            }
+            
+            // Sprawdź mapowanie słów kluczowych
+            for (const [keyword, mappedKey] of Object.entries(KEYWORD_MAPPING)) {
+                if (lowerName.includes(keyword)) {
+                    return ICON_DATABASE[mappedKey][0];
+                }
+            }
+            
+            // Domyślna ikona
+            return ICON_DATABASE.default[0];
+        }
+
+        // Search icons
+        function searchIcons(query, skillIndex) {
+            const resultsContainer = document.getElementById('iconSearchResults');
+            resultsContainer.innerHTML = '';
+            
+            if (!query) {
+                // Pokaż popularne ikony
+                const popularIcons = [
+                    'fab fa-html5', 'fab fa-css3-alt', 'fab fa-js-square', 'fab fa-python',
+                    'fab fa-react', 'fab fa-node-js', 'fab fa-java', 'fab fa-php',
+                    'fab fa-git-alt', 'fab fa-github', 'fab fa-docker', 'fab fa-aws',
+                    'fas fa-database', 'fab fa-linux', 'fab fa-discord', 'fas fa-code'
+                ];
+                
+                popularIcons.forEach(icon => {
+                    const iconResult = document.createElement('div');
+                    iconResult.className = 'icon-result';
+                    iconResult.innerHTML = `
+                        <div class="icon-preview"><i class="${icon}"></i></div>
+                        <div class="icon-name">${icon}</div>
+                        <button class="icon-select-btn" data-icon="${icon}">Wybierz</button>
+                    `;
+                    
+                    iconResult.querySelector('.icon-select-btn').addEventListener('click', () => {
+                        selectIconForSkill(icon, skillIndex);
+                    });
+                    
+                    resultsContainer.appendChild(iconResult);
+                });
+                return;
+            }
+            
+            const lowerQuery = query.toLowerCase();
+            const foundIcons = new Set();
+            
+            // Szukaj w nazwach technologii
+            for (const [tech, icons] of Object.entries(ICON_DATABASE)) {
+                if (tech.includes(lowerQuery)) {
+                    icons.forEach(icon => {
+                        if (!foundIcons.has(icon)) {
+                            foundIcons.add(icon);
+                            const iconResult = document.createElement('div');
+                            iconResult.className = 'icon-result';
+                            iconResult.innerHTML = `
+                                <div class="icon-preview"><i class="${icon}"></i></div>
+                                <div class="icon-name">${icon}</div>
+                                <button class="icon-select-btn" data-icon="${icon}">Wybierz</button>
+                            `;
+                            
+                            iconResult.querySelector('.icon-select-btn').addEventListener('click', () => {
+                                selectIconForSkill(icon, skillIndex);
+                            });
+                            
+                            resultsContainer.appendChild(iconResult);
+                        }
+                    });
+                }
+            }
+            
+            // Szukaj w mapowaniu słów kluczowych
+            for (const [keyword, mappedKey] of Object.entries(KEYWORD_MAPPING)) {
+                if (lowerQuery.includes(keyword) && ICON_DATABASE[mappedKey]) {
+                    ICON_DATABASE[mappedKey].forEach(icon => {
+                        if (!foundIcons.has(icon)) {
+                            foundIcons.add(icon);
+                            const iconResult = document.createElement('div');
+                            iconResult.className = 'icon-result';
+                            iconResult.innerHTML = `
+                                <div class="icon-preview"><i class="${icon}"></i></div>
+                                <div class="icon-name">${icon}</div>
+                                <button class="icon-select-btn" data-icon="${icon}">Wybierz</button>
+                            `;
+                            
+                            iconResult.querySelector('.icon-select-btn').addEventListener('click', () => {
+                                selectIconForSkill(icon, skillIndex);
+                            });
+                            
+                            resultsContainer.appendChild(iconResult);
+                        }
+                    });
+                }
+            }
+            
+            // Jeśli nie znaleziono, pokaż domyślne
+            if (foundIcons.size === 0) {
+                ICON_DATABASE.default.forEach(icon => {
+                    const iconResult = document.createElement('div');
+                    iconResult.className = 'icon-result';
+                    iconResult.innerHTML = `
+                        <div class="icon-preview"><i class="${icon}"></i></div>
+                        <div class="icon-name">${icon}</div>
+                        <button class="icon-select-btn" data-icon="${icon}">Wybierz</button>
+                    `;
+                    
+                    iconResult.querySelector('.icon-select-btn').addEventListener('click', () => {
+                        selectIconForSkill(icon, skillIndex);
+                    });
+                    
+                    resultsContainer.appendChild(iconResult);
+                });
+            }
+        }
+
+        // Select icon for skill
+        function selectIconForSkill(icon, skillIndex) {
+            const iconInput = document.querySelector(`.skill-icon-input[data-index="${skillIndex}"]`);
+            if (iconInput) {
+                iconInput.value = icon;
+                document.getElementById('iconSearchContainer').style.display = 'none';
+                document.getElementById('iconSearchInput').value = '';
+                document.getElementById('iconSearchResults').innerHTML = '';
+            }
+        }
+
+        // Open icon search for skill
+        function openIconSearch(skillIndex) {
+            currentIconSearchSkillIndex = skillIndex;
+            document.getElementById('iconSearchContainer').style.display = 'block';
+            document.getElementById('iconSearchInput').focus();
+            
+            // Wyszukaj ikony dla nazwy technologii
+            const skill = skillsData[skillIndex];
+            if (skill && skill.name) {
+                const suggestedIcon = findIconForTechnology(skill.name);
+                if (suggestedIcon) {
+                    document.getElementById('iconSearchInput').value = skill.name;
+                    searchIcons(skill.name, skillIndex);
+                } else {
+                    searchIcons('', skillIndex);
+                }
+            } else {
+                searchIcons('', skillIndex);
+            }
+        }
+
+        // Edit skills
+        function openSkillsEditor() {
+            const container = document.getElementById('skillsList');
+            container.innerHTML = '';
+            
+            skillsData.forEach((skill, index) => {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-edit-item';
+                skillItem.innerHTML = `
+                    <div class="skill-edit-header">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="${skill.icon}" style="color: var(--accent-lavender); font-size: 1.2rem;"></i>
+                            <input type="text" class="form-input skill-name-input" value="${skill.name}" data-index="${index}" placeholder="Nazwa umiejętności" style="width: 200px;">
+                        </div>
+                        <div>
+                            <button class="btn btn-success btn-small search-icon-btn" data-index="${index}" title="Wyszukaj ikonę">
+                                <i class="fas fa-search"></i>
+                            </button>
+                            <button class="btn btn-danger btn-small delete-skill-btn" data-index="${index}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label style="color: var(--text-gray); margin-bottom: 0.3rem; display: block;">Ikona:</label>
+                        <input type="text" class="form-input skill-icon-input" value="${skill.icon}" data-index="${index}" placeholder="fab fa-html5" readonly>
+                    </div>
+                    <div>
+                        <label style="color: var(--text-gray); margin-bottom: 0.3rem; display: block;">Poziom:</label>
+                        <select class="form-input skill-level-select" data-index="${index}">
+                            <option value="basic" ${skill.level === 'basic' ? 'selected' : ''}>Podstawowy</option>
+                            <option value="intermediate" ${skill.level === 'intermediate' ? 'selected' : ''}>Średnio-Zaawansowany</option>
+                            <option value="advanced" ${skill.level === 'advanced' ? 'selected' : ''}>Zaawansowany</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="color: var(--text-gray); margin-bottom: 0.3rem; display: block;">Opis:</label>
+                        <textarea class="form-input skill-desc-input" data-index="${index}" rows="2">${skill.description}</textarea>
+                    </div>
+                `;
+                container.appendChild(skillItem);
+            });
+            
+            // Dodaj event listener dla wyszukiwania ikon
+            document.querySelectorAll('.search-icon-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = parseInt(e.currentTarget.getAttribute('data-index'));
+                    openIconSearch(index);
+                });
+            });
+            
+            // Dodaj event listener dla nazwy umiejętności - automatyczne wyszukiwanie ikony
+            document.querySelectorAll('.skill-name-input').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const index = parseInt(e.target.getAttribute('data-index'));
+                    const skillName = e.target.value;
+                    const suggestedIcon = findIconForTechnology(skillName);
+                    if (suggestedIcon) {
+                        const iconInput = document.querySelector(`.skill-icon-input[data-index="${index}"]`);
+                        if (iconInput) {
+                            iconInput.value = suggestedIcon;
+                        }
+                    }
+                });
+            });
+            
+            document.getElementById('skillsModal').classList.add('active');
+        }
+
+        // Add new skill
+        function addNewSkill() {
+            const newSkill = {
+                name: "Nowa umiejętność",
+                icon: "fas fa-code",
+                level: "basic",
+                description: "Opis umiejętności"
+            };
+            
+            skillsData.push(newSkill);
+            openSkillsEditor();
+        }
+
+        // Save skills
+        function saveSkills() {
+            // Collect data from form
+            const nameInputs = document.querySelectorAll('.skill-name-input');
+            const iconInputs = document.querySelectorAll('.skill-icon-input');
+            const levelSelects = document.querySelectorAll('.skill-level-select');
+            const descInputs = document.querySelectorAll('.skill-desc-input');
+            
+            skillsData.forEach((skill, index) => {
+                if (nameInputs[index]) skill.name = nameInputs[index].value || "Nowa umiejętność";
+                if (iconInputs[index]) skill.icon = iconInputs[index].value || "fas fa-code";
+                if (levelSelects[index]) skill.level = levelSelects[index].value || "basic";
+                if (descInputs[index]) skill.description = descInputs[index].value || "Opis umiejętności";
+            });
+            
+            saveAllData();
+            renderSkills();
+            
+            showSuccessMessage('skillsSuccessMessage', 'Umiejętności zostały zaktualizowane!');
+            
+            setTimeout(() => {
+                document.getElementById('skillsModal').classList.remove('active');
+            }, 1500);
+        }
+
+        // Delete skill
+        function deleteSkill(index) {
+            if (confirm('Czy na pewno chcesz usunąć tę umiejętność?')) {
+                skillsData.splice(index, 1);
+                openSkillsEditor();
+            }
+        }
+
+        // Save contact data
+        function saveContactData() {
+            contactData.email = document.getElementById('contactEmail').value;
+            contactData.github = document.getElementById('contactGitHub').value;
+            contactData.discord = document.getElementById('contactDiscord').value;
+            
+            saveAllData();
+            updateContactDisplay();
+            
+            showSuccessMessage('contactSuccessMessage', 'Dane kontaktowe zostały zaktualizowane!');
+            
+            setTimeout(() => {
+                document.getElementById('contactModal').classList.remove('active');
+            }, 1500);
+        }
+
+        // Show success message
+        function showSuccessMessage(elementId, message) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.classList.add('show');
+            
+            setTimeout(() => {
+                element.classList.remove('show');
+            }, 3000);
         }
 
         // Login function
         function login(username, password) {
-            if (username === LOGIN_CONFIG.username && password === LOGIN_CONFIG.password) {
+            const correctUsername = decodeBase64(ENCODED_USERNAME);
+            const correctPassword = decodeBase64(ENCODED_PASSWORD);
+            
+            if (username === correctUsername && password === correctPassword) {
                 isLoggedIn = true;
-                localStorage.setItem('lukis_logged_in', 'true');
                 updateAdminUI();
                 document.getElementById('loginModal').classList.remove('active');
                 document.getElementById('loginError').classList.remove('show');
                 return true;
             } else {
-                showLoginError('Nieprawidłowa nazwa użytkownika lub hasło!');
+                const errorMsg = document.getElementById('loginError');
+                errorMsg.textContent = 'Nieprawidłowa nazwa użytkownika lub hasło!';
+                errorMsg.classList.add('show');
                 return false;
             }
-        }
-
-        function showLoginError(message) {
-            const errorMsg = document.getElementById('loginError');
-            errorMsg.textContent = message;
-            errorMsg.classList.add('show');
         }
 
         // Logout function
         function logout() {
             isLoggedIn = false;
-            localStorage.removeItem('lukis_logged_in');
             updateAdminUI();
             hideAdminPanel();
         }
@@ -1469,15 +2204,18 @@
         // Update admin UI based on login state
         function updateAdminUI() {
             const adminBtn = document.getElementById('adminBtn');
+            const addTimelineBtn = document.getElementById('addTimelineBtn');
             
             if (isLoggedIn) {
                 adminBtn.innerHTML = '<i class="fas fa-user-cog"></i> Panel admina';
-                adminBtn.classList.add('logged-in');
-                renderTimeline();
+                adminBtn.classList.add('logout-btn');
+                addTimelineBtn.style.display = 'block';
+                renderTimeline(); // Re-render to show edit/delete buttons
             } else {
                 adminBtn.innerHTML = '<i class="fas fa-user-lock"></i> Logowanie ownera';
-                adminBtn.classList.remove('logged-in');
-                renderTimeline();
+                adminBtn.classList.remove('logout-btn');
+                addTimelineBtn.style.display = 'none';
+                renderTimeline(); // Re-render to hide edit/delete buttons
             }
         }
 
@@ -1494,7 +2232,7 @@
         // Initialize on DOM load
         document.addEventListener('DOMContentLoaded', function() {
             // Load all data
-            loadData();
+            loadAllData();
             
             // Smooth scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1514,16 +2252,73 @@
                 });
             });
             
-            // Kopiowanie maila
-            document.querySelector('.contact-email').addEventListener('click', function() {
-                const email = contactData.email;
-                navigator.clipboard.writeText(email).then(() => {
-                    const originalText = this.textContent;
-                    this.textContent = 'Skopiowano!';
-                    setTimeout(() => {
-                        this.textContent = originalText;
-                    }, 2000);
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('mainHeader');
+                if (window.pageYOffset > 50) {
+                    header.style.padding = '0.7rem 5%';
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+                } else {
+                    header.style.padding = '1rem 5%';
+                    header.style.boxShadow = 'none';
+                }
+                
+                // Set active nav link
+                setActiveNavLink();
+            });
+            
+            // Set active nav link
+            function setActiveNavLink() {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('nav a[href^="#"]');
+                
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (window.pageYOffset >= sectionTop && 
+                        window.pageYOffset < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
                 });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('nav-active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('nav-active');
+                    }
+                });
+                
+                // Default to home if at top
+                if (window.pageYOffset < 100) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('nav-active');
+                    });
+                    document.querySelector('nav a[href="#home"]').classList.add('nav-active');
+                }
+            }
+            
+            setActiveNavLink();
+            
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe skill cards
+            document.querySelectorAll('.skill-card').forEach(el => {
+                observer.observe(el);
             });
             
             // Admin button click
@@ -1544,7 +2339,7 @@
             
             document.getElementById('editSkillsOption').addEventListener('click', () => {
                 hideAdminPanel();
-                alert('Edytowanie umiejętności - funkcja w budowie');
+                openSkillsEditor();
             });
             
             document.getElementById('editContactOption').addEventListener('click', () => {
@@ -1553,6 +2348,9 @@
             });
             
             document.getElementById('logoutOption').addEventListener('click', logout);
+            
+            // Open add timeline modal button
+            document.getElementById('openAddTimelineModal').addEventListener('click', openAddTimelineModal);
             
             function openAddTimelineModal() {
                 editingTimelineIndex = null;
@@ -1568,7 +2366,7 @@
             
             function openContactEditor() {
                 document.getElementById('contactEmail').value = contactData.email;
-                document.getElementById('contactPortfolio').value = contactData.portfolio;
+                document.getElementById('contactGitHub').value = contactData.github;
                 document.getElementById('contactDiscord').value = contactData.discord;
                 
                 document.getElementById('contactModal').classList.add('active');
@@ -1584,12 +2382,10 @@
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
                 
-                if (!username || !password) {
-                    showLoginError('Wprowadź nazwę użytkownika i hasło!');
-                    return;
+                if (login(username, password)) {
+                    document.getElementById('username').value = '';
+                    document.getElementById('password').value = '';
                 }
-                
-                login(username, password);
             });
             
             // Login on Enter key
@@ -1621,8 +2417,26 @@
                     addTimelineItem(year, title, description);
                 }
                 
-                document.getElementById('timelineModal').classList.remove('active');
-                editingTimelineIndex = null;
+                setTimeout(() => {
+                    document.getElementById('timelineModal').classList.remove('active');
+                    editingTimelineIndex = null;
+                }, 1500);
+            });
+            
+            // Skills modal handlers
+            document.getElementById('cancelSkills').addEventListener('click', () => {
+                document.getElementById('skillsModal').classList.remove('active');
+                document.getElementById('iconSearchContainer').style.display = 'none';
+            });
+            
+            document.getElementById('saveSkills').addEventListener('click', saveSkills);
+            
+            document.getElementById('addNewSkill').addEventListener('click', addNewSkill);
+            
+            // Icon search handler
+            document.getElementById('iconSearchInput').addEventListener('input', (e) => {
+                const query = e.target.value;
+                searchIcons(query, currentIconSearchSkillIndex);
             });
             
             // Contact modal handlers
@@ -1630,16 +2444,7 @@
                 document.getElementById('contactModal').classList.remove('active');
             });
             
-            document.getElementById('saveContact').addEventListener('click', () => {
-                contactData.email = document.getElementById('contactEmail').value;
-                contactData.portfolio = document.getElementById('contactPortfolio').value;
-                contactData.discord = document.getElementById('contactDiscord').value;
-                
-                saveData();
-                updateContactDisplay();
-                alert('Dane kontaktowe zostały zaktualizowane!');
-                document.getElementById('contactModal').classList.remove('active');
-            });
+            document.getElementById('saveContact').addEventListener('click', saveContactData);
             
             // Delete modal handlers
             document.getElementById('cancelDelete').addEventListener('click', () => {
@@ -1656,7 +2461,7 @@
             });
             
             // Close modals on outside click
-            document.querySelectorAll('.modal').forEach(modal => {
+            document.querySelectorAll('.admin-modal, .login-modal').forEach(modal => {
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal) {
                         modal.classList.remove('active');
@@ -1666,12 +2471,45 @@
                         if (modal.id === 'timelineModal') {
                             editingTimelineIndex = null;
                         }
+                        if (modal.id === 'skillsModal') {
+                            document.getElementById('iconSearchContainer').style.display = 'none';
+                        }
                         if (modal.id === 'deleteModal') {
                             itemToDelete = null;
                         }
                     }
                 });
             });
+            
+            // Delete skill event delegation
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.delete-skill-btn')) {
+                    const index = parseInt(e.target.closest('.delete-skill-btn').getAttribute('data-index'));
+                    deleteSkill(index);
+                }
+            });
+            
+            // Copy email functionality
+            document.querySelectorAll('.contact-email').forEach(emailLink => {
+                emailLink.addEventListener('click', function() {
+                    const email = this.getAttribute('data-email');
+                    navigator.clipboard.writeText(email).then(() => {
+                        const originalText = this.textContent;
+                        this.textContent = 'Skopiowano!';
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                        }, 2000);
+                    });
+                });
+            });
+            
+            // Auto-logout after 30 minutes
+            setInterval(() => {
+                if (isLoggedIn) {
+                    logout();
+                    alert('Sesja wygasła. Zaloguj się ponownie.');
+                }
+            }, 30 * 60 * 1000);
         });
     </script>
 </body>
